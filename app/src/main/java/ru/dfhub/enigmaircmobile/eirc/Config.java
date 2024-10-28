@@ -1,17 +1,15 @@
-package ru.dfhub.enigmaircmobile;
+package ru.dfhub.enigmaircmobile.eirc;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
+
+import ru.dfhub.enigmaircmobile.MainActivity;
 
 /**
  * Class for working with config
