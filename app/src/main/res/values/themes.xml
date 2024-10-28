@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.EnigmaIRCMobile" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="background">@color/other_user_message</item>
+        <item name="colorPrimary">@color/message_input_box</item>
+    </style>
+
+    <style name="Theme.EnigmaIRCMobile" parent="Base.Theme.EnigmaIRCMobile" />
+</resources>

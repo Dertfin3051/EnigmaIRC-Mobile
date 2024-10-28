@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="bg">#152329</color>
+
+    <color name="message_read_box">#263036</color>
+    <color name="message_input_box">#101e24</color>
+    <color name="other_user_message">#c6dee4</color>
+    <color name="self_user_message">#92b3bc</color>
+
+    <color name="main_page_bottom_info">#1D3338</color>
+
+</resources>

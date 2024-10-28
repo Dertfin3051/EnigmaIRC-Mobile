@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">EnigmaIRC Mobile</string>
+    <string name="start_window_welcome">Welcome to EnigmaIRC!</string>
+    <string name="start_window_about">Set the settings and start secure messaging!</string>
+
+    <string name="name_hint">Name</string>
+    <string name="server_address_hint">Server address</string>
+    <string name="server_port_hint">Port</string>
+    <string name="security_key_hint">Security key</string>
+    <string name="save_and_start_button_hint">Save and start</string>
+    <string name="main_page_bottom_info">EnigmaIRC Mobile v1.0 || Based on EnigmaIRC v2.1 || Using font "Kanit" from Google Fonts</string>
+
+    <string name="message_input_hint">Message</string>
+</resources>

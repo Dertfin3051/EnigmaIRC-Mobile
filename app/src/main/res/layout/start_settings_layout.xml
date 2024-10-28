@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/message_read_box"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="20sp"
+            android:fontFamily="@font/kanit_regular"
+            android:text="@string/start_window_welcome"
+            android:textColor="@color/other_user_message"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:text="@string/start_window_about"
+            android:textColor="@color/other_user_message"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <EditText
+            android:id="@+id/input_name"
+            android:layout_width="300sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/name_hint"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:inputType="text"
+            android:scrollHorizontally="true"
+            android:textColorHint="@color/other_user_message"
+            android:textColor="@color/other_user_message"
+            android:fontFamily="@font/kanit_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <EditText
+            android:id="@+id/input_server_address"
+            android:layout_width="220sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:hint="@string/server_address_hint"
+            android:maxLines="1"
+            android:inputType="text"
+            android:scrollHorizontally="true"
+            android:textColorHint="@color/other_user_message"
+            android:textColor="@color/other_user_message"
+            android:fontFamily="@font/kanit_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_name" />
+
+        <EditText
+            android:id="@+id/input_server_port"
+            android:layout_width="75sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:hint="@string/server_port_hint"
+            android:inputType="number"
+            android:maxLength="5"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:textColorHint="@color/other_user_message"
+            android:textColor="@color/other_user_message"
+            android:fontFamily="@font/kanit_regular"
+            app:layout_constraintStart_toEndOf="@+id/input_server_address"
+            app:layout_constraintTop_toBottomOf="@+id/input_name" />
+
+        <EditText
+            android:id="@+id/input_security_key"
+            android:layout_width="265sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:hint="@string/security_key_hint"
+            android:maxLines="1"
+            android:inputType="text"
+            android:scrollHorizontally="true"
+            android:textColorHint="@color/other_user_message"
+            android:textColor="@color/other_user_message"
+            android:fontFamily="@font/kanit_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_server_address" />
+
+        <ImageButton
+            android:id="@+id/generate_security_key"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/generate_key_button"
+            app:layout_constraintStart_toEndOf="@+id/input_security_key"
+            app:layout_constraintTop_toBottomOf="@+id/input_server_port"
+            />
+
+        <Button
+            android:id="@+id/save_and_start_button"
+            android:layout_width="220sp"
+            android:layout_height="50sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20sp"
+            android:text="@string/save_and_start_button_hint"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_security_key"
+            android:fontFamily="@font/kanit_regular"
+            android:backgroundTint="@color/message_input_box"
+            android:textColor="@color/other_user_message"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_page_bottom_info"
+        android:textColor="@color/main_page_bottom_info"
+        android:textSize="5sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
