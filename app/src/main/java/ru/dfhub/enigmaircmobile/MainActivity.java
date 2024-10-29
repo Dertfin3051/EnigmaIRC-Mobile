@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import java.io.File;
 
 import ru.dfhub.enigmaircmobile.eirc.Config;
+import ru.dfhub.enigmaircmobile.eirc.util.Encryption;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         generateSecretKeyButton.setOnClickListener(view -> {
-            String securityKey = ""; // In ftr, generate key
+            String securityKey = Encryption.generateNewKey();
             inputSecurityKey.setText(securityKey);
         });
     }
