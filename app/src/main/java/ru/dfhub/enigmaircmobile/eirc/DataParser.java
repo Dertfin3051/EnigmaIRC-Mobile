@@ -71,7 +71,7 @@ public class DataParser {
 
         String encryptedMessage;
         try {
-            //encryptedMessage = Encryption.encrypt(message);
+            encryptedMessage = Encryption.encrypt(message);
         } catch (Exception e) {
             Gui.showNewMessage("There was an error sending the message (encrypt process)", Gui.MessageType.SYSTEM_ERROR);
             e.printStackTrace();
@@ -121,7 +121,7 @@ public class DataParser {
 
         String message = "";
         try {
-            // message = Encryption.decrypt(encryptedMessage);
+            message = Encryption.decrypt(encryptedMessage);
         } catch (Exception e) {
             Gui.showNewMessage("Failed to decrypt the incoming message! (wrong encryption key)", Gui.MessageType.SYSTEM_ERROR);
             return;
