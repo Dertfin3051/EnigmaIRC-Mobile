@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Class for working with the server. Receiving and sending messages is done here.
@@ -36,10 +37,13 @@ public class ServerConnection extends Thread {
     }
 
     /**
-     * Send information to the server
+     * Send information to the server. Need to run async
      * @param data Data
      */
     public void sendToServer(String data) {
-        out.println(data);
+        CompletableFuture.runAsync(() -> {
+            out.println(data);
+        });
+
     }
 }

@@ -15,6 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.concurrent.CompletableFuture;
+
 import ru.dfhub.enigmaircmobile.eirc.Config;
 import ru.dfhub.enigmaircmobile.eirc.DataParser;
 import ru.dfhub.enigmaircmobile.eirc.Gui;
@@ -79,15 +81,16 @@ public class MessagingActivity extends AppCompatActivity {
         }
 
         /*
-        Trying to connect to the server
+        Trying to connect to the server. Need to run async
          */
-        try {
-            serverConnection = new ServerConnection(Config.getConfig().optString("server-address"), Config.getConfig().optInt("server-port", 6667));
-        } catch (Exception e)
-        {
-            Gui.showNewMessage("Failed connect to the server!", Gui.MessageType.SYSTEM_ERROR);
-            Gui.breakInput();
-        }
+        CompletableFuture.runAsync(() -> {
+            try {
+                serverConnection = new ServerConnection(Config.getConfig().optString("server-address"), Config.getConfig().optInt("server-port", 6667));
+            } catch (Exception e) {
+                Gui.showNewMessage(e.toString(), Gui.MessageType.SYSTEM_ERROR);
+                Gui.breakInput();
+            }
+        });
 
         DataParser.handleOutputSession(true);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> DataParser.handleOutputSession(false)));
