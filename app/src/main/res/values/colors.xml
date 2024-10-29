@@ -7,8 +7,14 @@
 
     <color name="message_read_box">#263036</color>
     <color name="message_input_box">#101e24</color>
+    <color name="input_text_color">#dceff3</color>
+
     <color name="other_user_message">#c6dee4</color>
     <color name="self_user_message">#92b3bc</color>
+    <color name="system_good_message">#45e945</color>
+    <color name="system_info_message">#ede846</color>
+    <color name="system_error_message">#f03d3d</color>
+    <color name="user_session_message">#e4a146</color>
 
     <color name="main_page_bottom_info">#1D3338</color>
 
