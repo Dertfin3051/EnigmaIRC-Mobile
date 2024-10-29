@@ -11,7 +11,6 @@ import java.net.Socket;
  */
 public class ServerConnection extends Thread {
 
-    /*
     private Socket server;
     private BufferedReader in;
     private PrintWriter out;
@@ -36,17 +35,11 @@ public class ServerConnection extends Thread {
         }
     }
 
-     */
-
     /**
      * Send information to the server
      * @param data Data
      */
-    /*
     public void sendToServer(String data) {
         out.println(data);
     }
-
-     */
-
 }
