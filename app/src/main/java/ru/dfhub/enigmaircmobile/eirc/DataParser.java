@@ -2,6 +2,9 @@ package ru.dfhub.enigmaircmobile.eirc;
 
 
 import org.json.JSONObject;
+
+import ru.dfhub.enigmaircmobile.MainActivity;
+import ru.dfhub.enigmaircmobile.MessagingActivity;
 import ru.dfhub.enigmaircmobile.eirc.util.Encryption;
 import ru.dfhub.enigmaircmobile.eirc.util.ResourcesReader;
 /**
@@ -50,7 +53,7 @@ public class DataParser {
                 handleUserSession(dataObj.optJSONObject("content"));
                 break;
             case "server-shutdown":
-                // Main.handleServerShutdown();
+                MessagingActivity.handleServerShutdown();
                 break;
         }
     }
@@ -78,12 +81,10 @@ public class DataParser {
             return;
         }
 
-        /*
-        Main.getServerConnection().sendToServer(template
+        MessagingActivity.getServerConnection().sendToServer(template
             .replace("%user%", Config.getConfig().optString("username"))
             .replace("%message%", encryptedMessage)
         );
-         */
     }
 
     /**
@@ -102,13 +103,10 @@ public class DataParser {
             return;
         }
 
-        /*
-        Main.getServerConnection().sendToServer(template
+        MessagingActivity.getServerConnection().sendToServer(template
                 .replace("%user%", Config.getConfig().optString("username"))
                 .replace("%status%", status)
         );
-
-         */
     }
 
     /**
