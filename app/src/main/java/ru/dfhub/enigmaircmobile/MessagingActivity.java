@@ -26,6 +26,7 @@ import ru.dfhub.enigmaircmobile.eirc.DataParser;
 import ru.dfhub.enigmaircmobile.eirc.Gui;
 import ru.dfhub.enigmaircmobile.eirc.ServerConnection;
 import ru.dfhub.enigmaircmobile.eirc.util.Encryption;
+import ru.dfhub.enigmaircmobile.eirc.util.Notification;
 
 public class MessagingActivity extends AppCompatActivity {
 
@@ -35,7 +36,7 @@ public class MessagingActivity extends AppCompatActivity {
     private ImageButton messageSendButton;
 
     private static Handler handler;
-
+    private static boolean isMinimized;
     private static ServerConnection serverConnection;
 
     @SuppressLint("StaticFieldLeak")
@@ -50,6 +51,7 @@ public class MessagingActivity extends AppCompatActivity {
         getActivityElements();
         CONTEXT = this;
         handler = new Handler(Looper.getMainLooper());
+        Notification.registerNotificationChannel();
 
         init();
         Gui.showWelcomeMessage();
@@ -80,6 +82,18 @@ public class MessagingActivity extends AppCompatActivity {
 
     public static Handler getHandler() {
         return handler;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isMinimized = false;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        isMinimized = true;
     }
 
     @Override
@@ -127,6 +141,10 @@ public class MessagingActivity extends AppCompatActivity {
                 Gui.breakInput();
             }
         });
+    }
+
+    public static boolean isMinimized() {
+        return isMinimized;
     }
 
     private void onMessageSendButton(View view) {

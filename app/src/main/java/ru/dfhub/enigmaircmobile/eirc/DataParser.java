@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import ru.dfhub.enigmaircmobile.MessagingActivity;
 import ru.dfhub.enigmaircmobile.eirc.util.Encryption;
+import ru.dfhub.enigmaircmobile.eirc.util.Notification;
 import ru.dfhub.enigmaircmobile.eirc.util.ResourcesReader;
 /**
  * Class for working with data and processing it
@@ -115,11 +116,14 @@ public class DataParser {
 
         String formattedMessage = String.format("%s\n%s", sender, message); // In ftr, handle timestamps here
 
+        String finalMessage = message;
         MessagingActivity.getHandler().post(() -> {
             if (sender.equals(Config.getConfig().optString("username"))) {
                 Gui.showNewMessage(formattedMessage, Gui.MessageType.SELF_USER_MESSAGE);
             } else {
                 Gui.showNewMessage(formattedMessage, Gui.MessageType.USER_MESSAGE);
+
+                if (MessagingActivity.isMinimized()) Notification.sendNotification(sender, finalMessage);
             }
             Gui.scrollDown();
         });
