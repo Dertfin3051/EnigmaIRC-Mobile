@@ -3,6 +3,8 @@ package ru.dfhub.enigmaircmobile;
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.widget.EditText;
@@ -28,6 +30,8 @@ public class MessagingActivity extends AppCompatActivity {
     private EditText messageInput;
     private ImageButton messageSendButton;
 
+    private static Handler handler;
+
     private static ServerConnection serverConnection;
 
     @SuppressLint("StaticFieldLeak")
@@ -41,6 +45,7 @@ public class MessagingActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getActivityElements();
         CONTEXT = this;
+        handler = new Handler(Looper.getMainLooper());
 
         Gui.showWelcomeMessage();
     }
@@ -84,13 +89,12 @@ public class MessagingActivity extends AppCompatActivity {
         CompletableFuture.runAsync(() -> {
             try {
                 serverConnection = new ServerConnection(Config.getConfig().optString("server-address"), Config.getConfig().optInt("server-port", 6667));
+                DataParser.handleOutputSession(true);
             } catch (Exception e) {
                 Gui.showNewMessage(e.toString(), Gui.MessageType.SYSTEM_ERROR);
                 Gui.breakInput();
             }
         });
-
-        DataParser.handleOutputSession(true);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> DataParser.handleOutputSession(false)));
     }
 
@@ -99,12 +103,14 @@ public class MessagingActivity extends AppCompatActivity {
     }
 
     public static void handleServerShutdown() {
-        Gui.showNewMessage("The server has shut down!", Gui.MessageType.SYSTEM_ERROR);
-
         Vibrator vibrator = (Vibrator) MessagingActivity.CONTEXT.getSystemService(VIBRATOR_SERVICE);
         vibrator.vibrate(VibrationEffect.createOneShot(1000, 1));
 
-        Gui.breakInput();
+        handler.post(() -> {
+            Gui.showNewMessage("The server has shut down!", Gui.MessageType.SYSTEM_ERROR);
+            Gui.breakInput();
+        });
+
     }
 
     private void getActivityElements() {
@@ -112,6 +118,10 @@ public class MessagingActivity extends AppCompatActivity {
         messageInput = findViewById(R.id.message_input_box);
         messageReadBox = findViewById(R.id.message_read_box);
         messageSendButton = findViewById(R.id.message_send_button);
+    }
+
+    public static Handler getHandler() {
+        return handler;
     }
 
 }

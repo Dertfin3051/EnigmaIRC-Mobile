@@ -89,14 +89,7 @@ public class DataParser {
     public static void handleOutputSession(boolean isJoin) {
         String status = isJoin ? "join" : "leave";
 
-        String template;
-        try {
-            template = MessageType.USER_SESSION.getTemplate();
-        } catch (Exception e) {
-            Gui.showNewMessage("There was an error sending the session status (receiving template)", Gui.MessageType.SYSTEM_ERROR);
-            e.printStackTrace();
-            return;
-        }
+        String template = MessageType.USER_SESSION.getTemplate();
 
         MessagingActivity.getServerConnection().sendToServer(template
                 .replace("%user%", Config.getConfig().optString("username"))
@@ -122,12 +115,14 @@ public class DataParser {
 
         String formattedMessage = String.format("%s\n%s", sender, message); // In ftr, handle timestamps here
 
-        if (sender.equals(Config.getConfig().optString("username"))) {
-            Gui.showNewMessage(formattedMessage, Gui.MessageType.SELF_USER_MESSAGE);
-        } else {
-            Gui.showNewMessage(formattedMessage, Gui.MessageType.USER_MESSAGE);
-        }
-        Gui.scrollDown();
+        MessagingActivity.getHandler().post(() -> {
+            if (sender.equals(Config.getConfig().optString("username"))) {
+                Gui.showNewMessage(formattedMessage, Gui.MessageType.SELF_USER_MESSAGE);
+            } else {
+                Gui.showNewMessage(formattedMessage, Gui.MessageType.USER_MESSAGE);
+            }
+            Gui.scrollDown();
+        });
     }
 
     /**
@@ -140,7 +135,9 @@ public class DataParser {
 
         String formattedMessage = String.format("%s %s", user, status);
 
-        Gui.showNewMessage(formattedMessage, Gui.MessageType.USER_SESSION);
-        Gui.scrollDown();
+        MessagingActivity.getHandler().post(() -> {
+            Gui.showNewMessage(formattedMessage, Gui.MessageType.USER_SESSION);
+            Gui.scrollDown();
+        });
     }
 }
