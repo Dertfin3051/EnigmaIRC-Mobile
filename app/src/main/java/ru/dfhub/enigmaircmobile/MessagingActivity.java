@@ -47,17 +47,44 @@ public class MessagingActivity extends AppCompatActivity {
         CONTEXT = this;
         handler = new Handler(Looper.getMainLooper());
 
+        init();
         Gui.showWelcomeMessage();
     }
 
-    /**
-     * A method that fires before the activity starts
-     * and after returning to the application (after it goes into the background)
-     */
-    @Override
-    protected void onResume() {
-        super.onResume();
+    public static ServerConnection getServerConnection() {
+        return serverConnection;
+    }
 
+    public static void handleServerShutdown() {
+        Vibrator vibrator = (Vibrator) MessagingActivity.CONTEXT.getSystemService(VIBRATOR_SERVICE);
+        vibrator.vibrate(VibrationEffect.createOneShot(1000, 1));
+
+        handler.post(() -> {
+            Gui.showNewMessage("The server has shut down!", Gui.MessageType.SYSTEM_ERROR);
+            Gui.breakInput();
+        });
+
+    }
+
+    private void getActivityElements() {
+        messageReadScroll = findViewById(R.id.message_read_scroll);
+        messageInput = findViewById(R.id.message_input_box);
+        messageReadBox = findViewById(R.id.message_read_box);
+        messageSendButton = findViewById(R.id.message_send_button);
+    }
+
+    public static Handler getHandler() {
+        return handler;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DataParser.handleOutputSession(false);
+        finish();
+    }
+
+    private void init() {
         /*
         Trying to load encryption key
         This occurs separately from encryption to distinguish between missing a key and an invalid key.
@@ -95,33 +122,5 @@ public class MessagingActivity extends AppCompatActivity {
                 Gui.breakInput();
             }
         });
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> DataParser.handleOutputSession(false)));
     }
-
-    public static ServerConnection getServerConnection() {
-        return serverConnection;
-    }
-
-    public static void handleServerShutdown() {
-        Vibrator vibrator = (Vibrator) MessagingActivity.CONTEXT.getSystemService(VIBRATOR_SERVICE);
-        vibrator.vibrate(VibrationEffect.createOneShot(1000, 1));
-
-        handler.post(() -> {
-            Gui.showNewMessage("The server has shut down!", Gui.MessageType.SYSTEM_ERROR);
-            Gui.breakInput();
-        });
-
-    }
-
-    private void getActivityElements() {
-        messageReadScroll = findViewById(R.id.message_read_scroll);
-        messageInput = findViewById(R.id.message_input_box);
-        messageReadBox = findViewById(R.id.message_read_box);
-        messageSendButton = findViewById(R.id.message_send_button);
-    }
-
-    public static Handler getHandler() {
-        return handler;
-    }
-
 }
