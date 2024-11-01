@@ -16,6 +16,9 @@ import android.widget.ScrollView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.util.concurrent.CompletableFuture;
 
 import ru.dfhub.enigmaircmobile.eirc.Config;
@@ -66,7 +69,6 @@ public class MessagingActivity extends AppCompatActivity {
             Gui.showNewMessage("The server has shut down!", Gui.MessageType.SYSTEM_ERROR);
             Gui.breakInput();
         });
-
     }
 
     private void getActivityElements() {
@@ -121,7 +123,7 @@ public class MessagingActivity extends AppCompatActivity {
                 serverConnection = new ServerConnection(Config.getConfig().optString("server-address"), Config.getConfig().optInt("server-port", 6667));
                 DataParser.handleOutputSession(true);
             } catch (Exception e) {
-                Gui.showNewMessage(e.toString(), Gui.MessageType.SYSTEM_ERROR);
+                Gui.showNewMessage("Can't connect to the server!", Gui.MessageType.SYSTEM_ERROR);
                 Gui.breakInput();
             }
         });
