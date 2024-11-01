@@ -53,8 +53,10 @@ public class Gui {
                 break;
         }
         LinearLayout messageReadBox = MessagingActivity.CONTEXT.findViewById(R.id.message_read_box);
-        messageReadBox.addView(message);
-        scrollDown();
+        MessagingActivity.getHandler().post(() -> {
+            messageReadBox.addView(message);
+            scrollDown();
+        });
     }
 
     /**
@@ -81,7 +83,7 @@ public class Gui {
         EditText input = MessagingActivity.CONTEXT.findViewById(R.id.message_input_box);
         input.setFocusable(false);
         input.setOnClickListener(view -> Toast.makeText(MessagingActivity.CONTEXT, "Not now available! Restart app and connect again", Toast.LENGTH_SHORT).show());
-        
+
         CompletableFuture.runAsync(() -> {
             try {
                 Thread.sleep(1000 * 120);
@@ -95,8 +97,10 @@ public class Gui {
      * Scroll down messageBox. Only for vertical scroll
      */
     public static void scrollDown() {
-        ScrollView scroll = MessagingActivity.CONTEXT.findViewById(R.id.message_read_scroll);
-        scroll.fullScroll(View.FOCUS_DOWN);
-        scroll.scrollBy(0, 50);
+        MessagingActivity.getHandler().post(() -> {
+            ScrollView scroll = MessagingActivity.CONTEXT.findViewById(R.id.message_read_scroll);
+            scroll.fullScroll(View.FOCUS_DOWN);
+            scroll.scrollBy(0, 50);
+        });
     }
 }
