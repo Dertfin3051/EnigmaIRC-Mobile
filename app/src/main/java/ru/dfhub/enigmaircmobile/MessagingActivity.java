@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -49,6 +50,8 @@ public class MessagingActivity extends AppCompatActivity {
 
         init();
         Gui.showWelcomeMessage();
+
+        messageSendButton.setOnClickListener(this::onMessageSendButton);
     }
 
     public static ServerConnection getServerConnection() {
@@ -122,5 +125,18 @@ public class MessagingActivity extends AppCompatActivity {
                 Gui.breakInput();
             }
         });
+    }
+
+    private void onMessageSendButton(View view) {
+        String text = messageInput.getText().toString();
+        if (text.isEmpty()) return;
+        if (text.equalsIgnoreCase("!!clear")) {
+            messageReadBox.removeAllViews();
+            messageInput.setText("");
+            return;
+        }
+
+        DataParser.handleOutputMessage(text);
+        messageInput.setText("");
     }
 }
