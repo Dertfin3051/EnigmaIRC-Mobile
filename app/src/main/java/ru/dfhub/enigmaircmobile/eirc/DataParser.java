@@ -15,21 +15,17 @@ public class DataParser {
      * Types of incoming and outgoing messages
      */
     public enum MessageType {
-        USER_MESSAGE("user_message"), // User text messages
-        USER_SESSION("user_session"); // Messages about user join/leave
+        USER_MESSAGE("{\"type\":\"user-message\",\"content\":{\"user\":\"%user%\",\"message\":\"%message%\"}}"), // User text messages
+        USER_SESSION("{\"type\":\"user-session\",\"content\":{\"user\":\"%user%\",\"status\":\"%status%\"}}"); // Messages about user join/leave
 
-        private String fileName;
+        private String template;
 
-        MessageType(String fileName) {
-            this.fileName = fileName;
-        }
-
-        private String getResourcesPath() {
-            return String.format("message_templates/%s.json", this.fileName);
+        MessageType(String template) {
+            this.template = template;
         }
 
         public String getTemplate() {
-            return new ResourcesReader(this.getResourcesPath()).readString().replace("\n", "");
+            return this.template;
         }
     }
 
