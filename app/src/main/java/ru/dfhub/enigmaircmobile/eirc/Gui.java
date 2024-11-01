@@ -1,7 +1,5 @@
 package ru.dfhub.enigmaircmobile.eirc;
 
-import android.content.Context;
-import android.graphics.Typeface;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;

@@ -3,7 +3,6 @@ package ru.dfhub.enigmaircmobile.eirc;
 
 import org.json.JSONObject;
 
-import ru.dfhub.enigmaircmobile.MainActivity;
 import ru.dfhub.enigmaircmobile.MessagingActivity;
 import ru.dfhub.enigmaircmobile.eirc.util.Encryption;
 import ru.dfhub.enigmaircmobile.eirc.util.ResourcesReader;

@@ -44,6 +44,5 @@ public class ServerConnection extends Thread {
         CompletableFuture.runAsync(() -> {
             out.println(data);
         });
-
     }
 }
