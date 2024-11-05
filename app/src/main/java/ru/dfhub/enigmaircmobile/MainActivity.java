@@ -84,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
         newConfig.put("server-address", inputServerAddr.getText().toString());
         newConfig.put("server-port", Integer.parseInt(inputServerPort.getText().toString()));
         newConfig.put("security-key", inputSecurityKey.getText().toString());
+
+        if (inputName.getText().toString().isEmpty()) newConfig.put("username", "guest");
+
         Config.saveConfig(newConfig, getApplicationContext());
     }
 }
