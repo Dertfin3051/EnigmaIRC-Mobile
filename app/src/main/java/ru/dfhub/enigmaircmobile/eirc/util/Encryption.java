@@ -132,7 +132,7 @@ public class Encryption {
      */
     public static void showIncorrectKeyError() {
         Gui.showNewMessage("Your encryption key is damaged or incorrect!", Gui.MessageType.SYSTEM_ERROR);
-        Gui.showNewMessage("Run the program with an empty encryption key to generate a new one", Gui.MessageType.SYSTEM_INFO);
+        Gui.showNewMessage("Generate new one by clicking \"refresh\" button on the start screen", Gui.MessageType.SYSTEM_INFO);
         Gui.breakInput();
     }
 
