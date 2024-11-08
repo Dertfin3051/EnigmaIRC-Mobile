@@ -114,8 +114,10 @@ public class MessagingActivity extends AppCompatActivity {
         } catch (Encryption.EncryptionException e)
         {
             Encryption.showNullKeyErrorAndGenerateNewOne();
+            return;
         } catch (IllegalArgumentException e) {
             Encryption.showIncorrectKeyError();
+            return;
         }
 
         /*
@@ -127,6 +129,7 @@ public class MessagingActivity extends AppCompatActivity {
         } catch (Exception e)
         {
             Encryption.showIncorrectKeyError();
+            return;
         }
 
         /*

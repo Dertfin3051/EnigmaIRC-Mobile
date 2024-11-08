@@ -138,13 +138,6 @@ public class Encryption {
 
     public static void showNullKeyErrorAndGenerateNewOne() {
         Gui.showNewMessage("You haven't set the encryption key!", Gui.MessageType.SYSTEM_ERROR);
-        try {
-            Encryption.generateNewKeyFile();
-            Gui.showNewMessage("The new key is saved to the file new_key.txt", Gui.MessageType.SYSTEM_INFO);
-        } catch (IOException ex)
-        {
-            Gui.showNewMessage("An error occurred while generating and saving a new key", Gui.MessageType.SYSTEM_ERROR);
-        }
         Gui.breakInput();
     }
 
