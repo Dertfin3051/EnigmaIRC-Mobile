@@ -83,14 +83,6 @@ public class Gui {
         EditText input = MessagingActivity.CONTEXT.findViewById(R.id.message_input_box);
         input.setFocusable(false);
         input.setOnClickListener(view -> Toast.makeText(MessagingActivity.CONTEXT, "Not now available! Restart app and connect again", Toast.LENGTH_SHORT).show());
-
-        CompletableFuture.runAsync(() -> {
-            try {
-                Thread.sleep(1000 * 120);
-            } catch (InterruptedException e) {}
-            Toast.makeText(MessagingActivity.CONTEXT, "EnigmaIRC closed!", Toast.LENGTH_LONG).show();
-            System.exit(0);
-        });
     }
 
     /**
