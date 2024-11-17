@@ -13,9 +13,14 @@ import java.io.InputStream;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 
 import androidx.core.app.NotificationCompat;
+
+import java.util.Arrays;
+import java.util.List;
 
 import ru.dfhub.enigmaircmobile.MessagingActivity;
 import ru.dfhub.enigmaircmobile.R;
@@ -30,7 +35,7 @@ public class Notification {
     private static int NOTIFICATION_ID = 0;
 
     public static void registerNotificationChannel() {
-        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "EnigmaIRC", NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "EnigmaIRC", NotificationManager.IMPORTANCE_HIGH);
         channel.setDescription("EnigmaIRC Notifications");
         manager.createNotificationChannel(channel);
     }
@@ -41,7 +46,8 @@ public class Notification {
                 .setContentTitle(title)
                 .setContentText(content)
                 .setSmallIcon(R.drawable.notification_logo)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true);
 
         builder.setChannelId(CHANNEL_ID);
         registerNotificationChannel();
